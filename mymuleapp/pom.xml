@@ -28,6 +28,29 @@
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.0.0</version>
 			</plugin>
+			
+			<plugin>
+			<groupId>org.sonatype.plugins</groupId>
+			<artifactId>nexus-staging-maven-plugin</artifactId>
+			<version>1.6.6</version>
+			<extensions>true</extensions>
+			<configuration>
+				<serverId>nexus</serverId>	
+				<nexusUrl>http://localhost:8081/nexus/</nexusUrl>
+				<skipStaging>true</skipStaging>
+			</configuration>
+			<executions>
+				<execution>
+					<id>default-deploy</id>
+					<phase>deploy</phase>
+					<goals>
+						<goal>deploy</goal>
+					</goals>
+				</execution>
+			</executions>
+			</plugin>
+			
+			
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
@@ -96,5 +119,13 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+    
+    <distributionManagement>
+    	<snapshotRepository>
+    	<id>mulrepos</id>
+    	<name>mulrepos</name>
+    	<url>http://localhost:8081/repository/mulrepos/</url>
+    	</snapshotRepository>
+    </distributionManagement>
 
 </project>
